@@ -1,0 +1,53 @@
+#include <SoftwareSerial.h>
+
+#define BAUD_RATE 4800
+
+ 
+
+SoftwareSerial swSer(13, 12);
+
+ 
+
+void setup()
+
+{
+
+  Serial.begin(BAUD_RATE);
+
+  swSer.begin(BAUD_RATE);
+
+}
+
+ 
+
+byte data[24];
+
+void loop()
+
+{
+
+  if (swSer.available() > 0) {
+
+    int a = swSer.readBytes(data, 24);
+
+    yield();
+
+  }
+
+ 
+
+  // Display
+
+  for (int i=0;i<24;i++)
+
+  {
+
+    Serial.print(data[i],HEX);
+
+    Serial.print(" ");
+
+  }
+
+  Serial.println();
+
+}
